@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Face Book Details Page</title>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+</style>
+
+</head>
+<!--      <textarea id="fname" rows="10" cols="100" ></textarea>-->
+<table>
+  <tr>
+    <th>Source</th>
+    <th>Name</th>
+    <th>Category</th>
+      <th>Action</th>
+  </tr>
+  <tr>
+    <td id="facebook" > </td>
+    <td id="name"> </td>
+    <td id="category"> </td>
+      <td id="action"> </td>
+  </tr>
+</table>
+
+<body>
+<script>
+    $(document).ready(function(){
+
+      $.ajax({
+        url:'http://127.0.0.1:8000/get/page/details/',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data)
+            alert(JSON.stringify(data));
+            stringify_data=JSON.stringify(data['data']['data']);
+            $('#facebook').html(stringify_data['id']);
+            $('#name').html(stringify_data['title']);
+            $('#category').html(stringify_data['type']);
+            $('#action').html(stringify_data['url']);
+            },
+        error: function(data){
+            alert("No Stocks To Display")
+            }
+      });
+});
+</script>
+</body>
+</html>
